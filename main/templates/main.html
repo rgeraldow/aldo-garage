@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Aldo's Garage</h1>
 
 <h5>NPM: </h5>
@@ -9,13 +11,33 @@
 <h5>Class: </h5>
 <p>{{class}}</p> 
 
-<h5>E-Commerce: </h5>
-<p>{{e-commerce}}</p> 
+{% if not car_entries %}
+<p>Belum ada data mobil yang masuk.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Car Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Horsepower</th>
+  </tr>
 
-<h5>Produk: </h5>
-<p>{{product}}</p>
+  {% comment %} Berikut cara memperlihatkan data mobil di bawah baris ini 
+  {% endcomment %} 
+  {% for car_entry in car_entries %}
+  <tr>
+    <td>{{car_entry.name}}</td>
+    <td>{{car_entry.price}}</td>
+    <td>{{car_entry.description}}</td>
+    <td>{{car_entry.car_horsepower}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
 
-<h5>Harga: </h5>
-<p>{{price}}</p> 
+<br />
 
-<h1>Aldo's Garage</h1>
+<a href="{% url 'main:create_car_entry' %}">
+  <button>Add New Car Entry</button>
+</a>
+{% endblock content %}

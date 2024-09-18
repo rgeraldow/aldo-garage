@@ -2,9 +2,9 @@
 
 **Tugas Individu - Kelas B**
 
-> **Aldo's Garage** merupakan proyek Django sederhana berbentuk website yang menjual berbagai mobil dan dapat dikatakan sebagai e-commerce. Proyek ini saya buat untuk memenuhi Tugas Individu mata kuliah PBP Gasal 2024/2025 yang dapat diakses pada link [ini](http://rogerio-geraldo-aldo-garage.pbp.cs.ui.ac.id/) .
+> **Aldo's Garage** merupakan proyek Django sederhana berbentuk website yang menjual berbagai mobil dan dapat dikatakan sebagai e-commerce. Proyek ini saya buat untuk memenuhi Tugas Individu mata kuliah PBP Gasal 2024/2025 yang dapat diakses pada link [ini](http://rogerio-geraldo-aldogarage.pbp.cs.ui.ac.id/) .
 
-[Website Aldo's Garage](http://rogerio-geraldo-aldo-garage.pbp.cs.ui.ac.id/)
+[Website Aldo's Garage](http://rogerio-geraldo-aldogarage.pbp.cs.ui.ac.id/)
 
 <details>
 <summary> <b> Tugas 2 </b> </summary>

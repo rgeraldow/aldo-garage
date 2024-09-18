@@ -276,7 +276,7 @@ Setelah itu kita dapat menjalankan `main` dengan command `python manage.py runse
     ]
     ```
 
-Dengan ini, input `form` adapat dijalankan dengan command `python manage.py runserver` dan buka link <http://localhost:8000>.
+Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runserver` dengan membuka link <http://localhost:8000>.
 
 ## Postman
 1. XML

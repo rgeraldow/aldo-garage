@@ -281,16 +281,16 @@ Setelah itu kita dapat menjalankan `main` dengan command `python manage.py runse
 Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runserver` dengan membuka link <http://localhost:8000>.
 
 ## Postman
-**1. XML**
+## **1. XML**
 ![XML](xml.png)
 
-**2. JSON**
+## **2. JSON**
 ![JSON](json.png)
 
-**3. XML by ID**
+## **3. XML by ID**
 ![XML by ID](<xml id.png>)
 
-**4. JSON by ID**
+## **4. JSON by ID**
  ![JSON by ID](<json id.png>)
 
 

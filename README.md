@@ -6,6 +6,8 @@
 
 [Website Aldo's Garage](http://rogerio-geraldo-aldogarage.pbp.cs.ui.ac.id/)
 
+## **Penjelasan**
+
 <details>
 <summary> <b> Tugas 2 </b> </summary>
 
@@ -13,65 +15,65 @@
 
 * ### Melakukan Inisiasi Project
 
-Petama-tama saya membuat direktori baru dengan nama aldo-garage, kemudian setelah itu saya membuat file `requirements.txt` yang berisi dependencies dan mengisinya dengan dependencies yang ada.
+    Petama-tama saya membuat direktori baru dengan nama aldo-garage, kemudian setelah itu saya membuat file `requirements.txt` yang berisi dependencies dan mengisinya dengan dependencies yang ada.
 
-Setelah itu saya melakukan instalasi menggunakan virtual environment pada terminal dengan command `pip install -r requirements.txt` lalu membuat proyek Django dengan perintah `django-admin startproject aldo-garage .`
+    Setelah itu saya melakukan instalasi menggunakan virtual environment pada terminal dengan command `pip install -r requirements.txt` lalu membuat proyek Django dengan perintah `django-admin startproject aldo-garage .`
 
 * ### Run Server Django
 
-Untuk melakukan runserver, saya menambahkan `["localhost", "127.0.0.1"]` pada `ALLOWED_HOSTS` yang ada pada file `setting.py` untuk melakukan deployment kemudian menjalankan server dengan command `python manage.py runserver`
+    Untuk melakukan runserver, saya menambahkan `["localhost", "127.0.0.1"]` pada `ALLOWED_HOSTS` yang ada pada file `setting.py` untuk melakukan deployment kemudian menjalankan server dengan command `python manage.py runserver`
 
 * ### Menginisiasi `main`
 
-Untuk membuat `main` lakukan command `python manage.py startapp main`, kemudian kita harus menambahkan `main` ke `INSTALLED_APPS` pada file `settings.py`.
+    Untuk membuat `main` lakukan command `python manage.py startapp main`, kemudian kita harus menambahkan `main` ke `INSTALLED_APPS` pada file `settings.py`.
 
-Setelah menginisiasi `main` saya mengubah file `models.py` pada direktori `main` untuk melakukan mendefinisikan model baru dengan class dan fungsi yang ada pada tutorial.
+    Setelah menginisiasi `main` saya mengubah file `models.py` pada direktori `main` untuk melakukan mendefinisikan model baru dengan class dan fungsi yang ada pada tutorial.
 
-Setelah itu saya melakukan migrate model baru tersebut dengan command `python manage.py makemigrations` dan `python manage.py migrate`.
+    Setelah itu saya melakukan migrate model baru tersebut dengan command `python manage.py makemigrations` dan `python manage.py migrate`.
 
 * ### Membuat `main.html`
 
-Mengisi file `main.html` dengan template:
+    Mengisi file `main.html` dengan template:
 
-```
-<h1>Aldo's Garage</h1>
+    ```
+    <h1>Aldo's Garage</h1>
 
-<h5>NPM: </h5>
-<p>{{npm}}</p> 
+    <h5>NPM: </h5>
+    <p>{{npm}}</p> 
 
-<h5>Name: </h5>
-<p>{{name}}</p>
+    <h5>Name: </h5>
+    <p>{{name}}</p>
 
-<h5>Class: </h5>
-<p>{{class}}</p> 
+    <h5>Class: </h5>
+    <p>{{class}}</p> 
 
-<h5>E-Commerce: </h5>
-<p>{{e-commerce}}</p> 
+    <h5>E-Commerce: </h5>
+    <p>{{e-commerce}}</p> 
 
-<h5>Produk: </h5>
-<p>{{product}}</p>
+    <h5>Produk: </h5>
+    <p>{{product}}</p>
 
-<h5>Harga: </h5>
-<p>{{price}}</p> 
+    <h5>Harga: </h5>
+    <p>{{price}}</p> 
 
-```
+    ```
 
-Kemudian kita juga harus mengisi file `views.py` dengan template function `show_main` yang ada pada file tutorial.
+    Kemudian kita juga harus mengisi file `views.py` dengan template function `show_main` yang ada pada file tutorial.
 
-* ### Routing `main`
+    * ### Routing `main`
 
-Saya mengatur URL pada aplikasi `main` dengan mengedit file `urls.py` pada folder `main` dengan template:
+    Saya mengatur URL pada aplikasi `main` dengan mengedit file `urls.py` pada folder `main` dengan template:
 
-```
-from django.urls import path
-from main.views import show_main
+    ```
+    from django.urls import path
+    from main.views import show_main
 
-app_name = 'main'
+    app_name = 'main'
 
-urlpatterns = [
-    path('', show_main, name='show_main'),
-]
-```
+    urlpatterns = [
+        path('', show_main, name='show_main'),
+    ]
+    ```
 
 Setelah itu kita dapat menjalankan `main` dengan command `python manage.py runserver`
 
@@ -281,10 +283,13 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
 ## Postman
 1. XML
 ![XML](xml.png)
+
 2. JSON
 ![JSON](json.png)
+
 3. XML by ID
 ![XML by ID](<xml id.png>)
+
 4. JSON by ID
  ![JSON by ID](<json id.png>)
 

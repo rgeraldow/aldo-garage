@@ -614,7 +614,7 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
     ```
 
     Jangan lupa lakukan migration untuk menyimpan semua perubahan yang telah dilakukan, lalu bukalah link website dan tugas 4 selesai.
-
+</details>
 
 <details>
 <summary> <b> Tugas 5 </b> </summary>

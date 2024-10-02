@@ -616,3 +616,333 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
     Jangan lupa lakukan migration untuk menyimpan semua perubahan yang telah dilakukan, lalu bukalah link website dan tugas 4 selesai.
 
 
+<details>
+<summary> <b> Tugas 5 </b> </summary>
+
+## **Jawaban Tugas 5**
+
+* ### Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+    Dalam CSS, ketika ada beberapa selector yang berlaku untuk elemen yang sama, browser menentukan prioritas berdasarkan *spesifisitas*. Spesifisitas dihitung berdasarkan empat jenis selector utama: inline styles, ID selectors, class selectors/attribute selectors/pseudo-classes, dan element selectors/pseudo-elements. Urutan spesifisitas dihitung sebagai angka, di mana inline styles memiliki prioritas tertinggi, kemudian diikuti oleh ID selectors, lalu class selectors, dan terakhir element selectors. Misalnya, selector `#header` (ID) akan memiliki prioritas lebih tinggi dibandingkan `.nav-item` (class), dan `.nav-item` akan memiliki prioritas lebih tinggi daripada button (element).
+
+    Selain itu, jika dua selector memiliki spesifisitas yang sama, CSS mengikuti aturan cascade di mana aturan yang ditulis terakhir dalam kode akan diterapkan. Namun, jika ada properti CSS yang menggunakan `important`, itu akan mengesampingkan semua aturan lainnya, termasuk inline styles, karena `!important` memiliki prioritas tertinggi. Pada akhirnya, jika tidak ada aturan yang relevan, elemen HTML bisa mewarisi properti dari elemen induknya atau menggunakan nilai default yang diberikan oleh browser. Jadi, urutan prioritas dalam CSS secara keseluruhan adalah: `!important`, inline styles, ID selectors, class selectors, element selectors, dan kemudian cascade.
+
+* ### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+    
+    Responsive design menjadi konsep yang sangat penting dalam pengembangan aplikasi web karena pengguna saat ini mengakses internet melalui berbagai perangkat dengan ukuran layar yang berbeda, seperti smartphone, tablet, dan komputer desktop. Dengan responsive design, tampilan dan elemen pada sebuah website dapat menyesuaikan secara otomatis dengan ukuran layar perangkat yang digunakan. Hal ini membuat pengalaman pengguna (user experience) menjadi lebih baik, karena website tetap terlihat rapi, mudah dibaca, dan mudah dinavigasi di perangkat apa pun tanpa harus melakukan zoom atau scroll berlebihan. Sebuah website yang tidak responsif bisa membuat pengguna frustrasi, dan mereka cenderung meninggalkan website tersebut.
+
+    Contoh aplikasi yang sudah menerapkan responsive design adalah **Tokopedia**. Baik ketika diakses melalui ponsel maupun komputer, tata letak Tokopedia akan menyesuaikan ukuran layar, dengan elemen-elemen seperti foto, teks, dan tombol yang tetap proporsional dan mudah digunakan. Di sisi lain, aplikasi atau website lama yang belum menerapkan responsive design mungkin masih memiliki tampilan yang tetap dan hanya cocok di layar besar seperti desktop, sehingga tampilannya menjadi berantakan atau sulit digunakan saat diakses melalui ponsel. Misalnya, banyak website statis lama yang hanya dioptimalkan untuk desktop belum menerapkan konsep ini, sehingga tampilannya terlalu besar atau elemen-elemen tidak tersusun rapi ketika diakses dari perangkat mobile.
+
+    Dengan menerapkan responsive design, pengguna bisa mengakses aplikasi dari berbagai perangkat dengan mendapatkan pengalaman yang konsisten dan menyenangkan, yang sangat penting di era digital saat ini di mana penggunaan ponsel semakin meningkat.
+
+* ### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+
+    **Margin**, **border**, dan **padding** adalah tiga properti utama dalam CSS yang digunakan untuk mengatur tata letak dan jarak elemen di halaman web. **Margin** adalah ruang kosong di luar elemen yang memisahkan elemen tersebut dari elemen lain di sekitarnya, memberikan jarak eksternal antara elemen-elemen yang berbeda. Misalnya, jika dua elemen terlalu berdekatan, margin bisa digunakan untuk membuat jarak di antara mereka lebih lebar. **Border** adalah garis yang mengelilingi elemen, yang berada di antara margin dan padding, dan dapat diatur dalam hal ketebalan, warna, serta gaya garis (seperti solid, dashed, atau dotted). Border berfungsi untuk memberi batas visual yang jelas pada elemen. **Padding** adalah ruang kosong di dalam elemen yang memisahkan konten elemen dari batas (border). Padding memberikan jarak antara konten, seperti teks atau gambar, dengan tepi elemen itu sendiri, sehingga konten tidak menempel langsung pada border. Ketiga properti ini bekerja bersama untuk menentukan jarak dan ukuran elemen. Sebagai contoh, jika kita memiliki sebuah kotak teks, margin akan menambah jarak antara kotak tersebut dan elemen lain, border akan membentuk garis di sekeliling kotak, dan padding akan memastikan bahwa teks di dalam kotak tersebut tidak terlalu dekat dengan border. Dengan mengatur margin, border, dan padding, Anda bisa mengontrol tata letak dan tampilan elemen web secara efektif.
+
+* ###  Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+    **Flexbox** dan **Grid Layout** adalah dua konsep layout dalam CSS yang memudahkan pengaturan tata letak elemen pada halaman web. **Flexbox** (atau fleksibel box) digunakan untuk mengatur elemen dalam satu dimensi, yaitu baik dalam **baris (row)** atau **kolom (column)**. Flexbox sangat berguna ketika kita ingin membuat elemen-elemen di dalam container saling menyesuaikan ukuran sesuai ruang yang tersedia. Dengan flexbox, kita bisa dengan mudah mengatur apakah elemen harus sejajar secara horizontal atau vertikal, menambahkan ruang kosong di antara elemen, atau bahkan membuat elemen otomatis menempati lebih banyak ruang. Flexbox biasanya lebih cocok untuk layout yang sederhana, seperti membuat navbar, baris tombol, atau menyejajarkan gambar.
+
+    Sementara itu, **Grid Layout** adalah sistem layout dua dimensi yang lebih canggih. Dengan Grid, kita bisa mengatur elemen-elemen di dalam container dalam **baris** dan **kolom** secara bersamaan. Ini membuat Grid ideal untuk layout yang lebih kompleks, seperti mendesain halaman penuh dengan header, konten, sidebar, dan footer. Grid memungkinkan kita menentukan ukuran masing-masing baris dan kolom secara fleksibel dan menempatkan elemen-elemen di dalamnya dengan lebih presisi. Jadi, kalau flexbox lebih fokus pada mengatur elemen dalam satu dimensi, grid memungkinkan kita mengatur dalam dua dimensi, membuatnya lebih cocok untuk tata letak yang memerlukan struktur yang lebih rumit. 
+
+    Secara umum, **flexbox** lebih baik untuk tata letak yang sederhana atau elemen yang disusun dalam satu arah (baik horizontal atau vertikal), sedangkan **grid** lebih cocok untuk tata letak yang membutuhkan pengaturan dalam dua arah (baris dan kolom).
+
+    
+## **Pengimplementasian Checklist**
+
+* ### Menambahkan Tailwind ke dalam aplikasi
+
+    Untuk mengkoneksikan template django dengan tailwind, kita perlu menambahkan baris kode script cdn tailwind pada `templates/base.html` di bagian head
+
+    ```
+    <head>
+    {% block meta %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    </head>
+    ```
+
+* ### Buat fitur edit dan delete product
+
+    Pertama kita akan membuat fitur baru yaitu edit dan delete product dengan menambahkan function `edit_car` dan `delete_car` pada file `views.py` yang ada pada subdirektori `main`
+
+    ```
+    def edit_car(request, id):
+        # Get car entry berdasarkan id
+        car = CarEntry.objects.get(pk = id)
+
+        # Set car entry sebagai instance dari form
+        form = CarEntryForm(request.POST or None, instance=car)
+
+        if form.is_valid() and request.method == "POST":
+            # Simpan form dan kembali ke halaman awal
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "edit_car.html", context)
+
+    def delete_car(request, id):
+        # Get car berdasarkan id
+        car = CarEntry.objects.get(pk = id)
+        # Hapus car
+        car.delete()
+        # Kembali ke halaman awal
+        return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+
+    Kemudian, tambahkan import seperti berikut pada file `views.py`
+
+    ```
+    from django.shortcuts import .., reverse
+    from django.http import .., HttpResponseRedirect
+    ```
+
+    Lalu buat file html baru dengan nama `edit_car` pada subdirektori `main/templates` dan isi dengan kode sebagai berikut
+
+    ```
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block meta %}
+    <title>Edit Car</title>
+    {% endblock meta %}
+
+    {% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="flex flex-col min-h-screen bg-gray-900"> <!-- Latar belakang abu-abu gelap -->
+    <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+        <h1 class="text-3xl font-bold text-center mb-8 text-yellow-400">Edit Car Entry</h1> <!-- Teks berwarna kuning -->
+
+        <div class="bg-gray-800 rounded-lg p-6 form-style"> <!-- Latar belakang kotak abu-abu gelap -->
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="flex flex-col">
+                    <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-black"> <!-- Teks label berwarna putih -->
+                        {{ field.label }}
+                    </label>
+                    <div class="w-full">
+                        {{ field }} 
+                    </div>
+                    {% if field.help_text %}
+                        <p class="mt-1 text-sm text-gray-400">{{ field.help_text }}</p> <!-- Teks bantuan berwarna abu-abu -->
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ error }}</p> <!-- Teks error berwarna merah -->
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="flex justify-center mt-6">
+                <button type="submit" class="bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-600 transition duration-300 ease-in-out w-full">
+                    Edit Car Entry
+                </button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+    {% endblock content %}
+    ```
+    
+    Import function yang telah dibuat ke `urls.py` yang ada pada `main` dan tambahkan `urlpatterns` nya
+
+    ```
+    from main.views import ..., edit_car, delete_car
+    ...
+    urlpatterns = [
+        ...,
+        path('edit-car/<uuid:id>', edit_car, name='edit_car'),
+        path('delete/<uuid:id>', delete_car, name='delete_car'),
+    ]
+    ```
+
+    Lalu buka `main.html` dan tambahkan kode berikut agar terdapat button untuk edit dan delete pada setiap produk
+
+    ```
+    ...
+    <tr>
+        ...
+        <td>
+            <a href="{% url 'main:edit_car' car_entry.pk %}">
+                <button>
+                    Edit
+                </button>
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'main:delete_car' car_entry.pk %}">
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+    ...
+    ```
+
+* ### Menambahkan navigation bar pada aplikasi
+
+    Untuk membuat navigation bar, kita perlu membuat file html baru pada folder `templates` yang ada pada root directory dengan nama `navbar.html` dan isi dengan kode sebagai berikut
+
+    ```
+    <nav class="bg-yellow-500 shadow-lg fixed top-0 left-0 z-40 w-screen"> <!-- Ubah warna background jadi kuning -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-center text-black">Aldo's Garage</h1> <!-- Sesuaikan warna teks -->
+                </div>
+                <div class="hidden md:flex items-center">
+                    {% if user.is_authenticated %}
+                        <span class="text-gray-800 mr-4">Welcome, {{ user.username }}</span> <!-- Sesuaikan warna teks -->
+                        <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Logout
+                        </a>
+                {% else %}
+                    <a href="{% url 'main:login' %}" class="text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mr-2">
+                    Login
+                    </a>
+                    <a href="{% url 'main:register' %}" class="text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Register
+                    </a>
+                {% endif %}
+                </div>
+                <div class="md:hidden flex items-center">
+                <button class="mobile-menu-button">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden  px-4 w-full md:max-w-full">
+            <div class="pt-2 pb-3 space-y-1 mx-auto">
+                {% if user.is_authenticated %}
+                <span class="block text-gray-800 px-3 py-2">Welcome, {{ user.username }}</span> <!-- Warna teks disesuaikan -->
+                <a href="{% url 'main:logout' %}" class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Logout
+                </a>
+                {% else %}
+                <a href="{% url 'main:login' %}" class="block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mb-2">
+                    Login
+                </a>
+                <a href="{% url 'main:register' %}" class="block text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    Register
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    
+        <!-- Script for Mobile Menu -->
+        <script>
+            const btn = document.querySelector("button.mobile-menu-button");
+            const menu = document.querySelector(".mobile-menu");
+        
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("hidden");
+            });
+        </script>
+    </nav>
+  
+
+    Kemudian, tautkan navbar tersebut ke dalam `main.html`, `create_car_entry.html`, dan `edit_car.html` yang berada di subdirektori `main/templates/` dengan menggunakan tags include:
+
+    ```
+    {% extends 'base.html' %}
+    {% block content %}
+    {% include 'navbar.html' %}
+    ...
+    {% endblock content%}
+    ```
+
+* ### Konfigurasi static filles pada aplikasi
+
+    Pada `settings.py` tambahkan middleware WhiteNoise
+
+    ```
+    ...
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware', #Tambahkan tepat di bawah SecurityMiddleware
+        ...
+    ]
+    ...
+    ```
+
+    Lalu pastikan variabel `STATIC_ROOT`, `STATICFILES_DIRS` dan `STATIC_URL` dikonfigurasikan seperti
+
+    ```
+    ...
+    STATIC_URL = '/static/'
+    if DEBUG:
+        STATICFILES_DIRS = [
+            BASE_DIR / 'static' # merujuk ke /static root project pada mode development
+        ]
+    else:
+        STATIC_ROOT = BASE_DIR / 'static' # merujuk ke /static root project pada mode production
+    ...
+    ```
+
+    * ### Styling website
+
+    Buat file `global.css` pada `/static/css` dan isi dengan
+
+    ```
+    .form-style form input, form textarea, form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #2e2e2e; 
+    background-color: #1c1c1c; 
+    color: #ffffff;
+    border-radius: 0.375rem;
+    font-family: 'Arial', sans-serif; 
+    transition: border-color 0.3s ease-in-out;
+    }
+    .form-style form input:focus, form textarea:focus, form select:focus {
+        outline: none;
+        border-color: #ffcc00; 
+        box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.5); 
+    }
+
+    @keyframes shine {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+    .animate-shine {
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.1));
+        background-size: 200% 100%;
+        animation: shine 3s infinite;
+        border-radius: 0.375rem;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* Efek berkilau seperti permukaan mobil */
+    }
+
+    /* Tambahan styling untuk tombol */
+    .form-style form button {
+        background-color: #ffcc00; /* Warna aksen kuning untuk tombol */
+        color: #1c1c1c;
+        border: none;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .form-style form button:hover {
+        background-color: #e6b800; /* Warna sedikit lebih gelap saat hover */
+    }
+    ```
+
+    Lalu lakukan kustomisasi html pada halaman-halaman yang ada seperti `login.html`, `register.html`, `main.html`, `create_car_entry.html` dan `edit_car.html` sesuai dengan preferensi design masing-masing.
+
+
+</details>
+
+
+

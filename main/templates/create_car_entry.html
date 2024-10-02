@@ -1,18 +1,44 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h1>Add New Car Entry</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block meta %}
+<title>Add Car</title>
+{% endblock meta %}
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Car Entry" />
-      </td>
-    </tr>
-  </table>
-</form>
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="flex flex-col min-h-screen bg-gray-900"> <!-- Background abu-abu gelap -->
+  <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+    <h1 class="text-3xl font-bold text-center mb-8 text-yellow-400">Add Car Entry</h1> <!-- Aksen kuning pada judul -->
+  
+    <div class="bg-gray-800 shadow-md rounded-lg p-6 form-style"> <!-- Background form abu-abu gelap -->
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="flex flex-col">
+            <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-white"> <!-- Teks label berwarna putih -->
+              {{ field.label }}
+            </label>
+            <div class="w-full">
+              {{ field|add_class:"bg-gray-700 text-white border-gray-600 focus:border-yellow-500 focus:ring-yellow-500" }} <!-- Warna input field disesuaikan -->
+            </div>
+            {% if field.help_text %}
+              <p class="mt-1 text-sm text-gray-400">{{ field.help_text }}</p> <!-- Teks bantuan berwarna abu-abu terang -->
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p> <!-- Teks error berwarna merah -->
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div class="flex justify-center mt-6">
+          <button type="submit" class="bg-yellow-500 text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-yellow-600 transition duration-300 ease-in-out w-full">
+            Add Car Entry
+          </button> <!-- Tombol dengan aksen kuning -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

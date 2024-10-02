@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import CarEntryForm
 from main.models import CarEntry
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
@@ -87,3 +87,26 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_car(request, id):
+    # Get car entry berdasarkan id
+    car = CarEntry.objects.get(pk = id)
+
+    # Set car entry sebagai instance dari form
+    form = CarEntryForm(request.POST or None, instance=car)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_car.html", context)
+
+def delete_car(request, id):
+    # Get car berdasarkan id
+    car = CarEntry.objects.get(pk = id)
+    # Hapus car
+    car.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))

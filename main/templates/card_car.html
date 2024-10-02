@@ -1,0 +1,51 @@
+{% load humanize %}
+
+<!-- Container utama yang membungkus card -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-screen overflow-y-auto px-6 py-8"> <!-- Grid layout yang menampilkan 3 card per baris di layar besar -->
+
+  <!-- Card 1 -->
+  <div class="relative bg-gray-800 shadow-lg rounded-lg mb-6 border-2 border-gray-700 transition-transform duration-300 hover:scale-105 min-w-[300px]"> <!-- Tambahkan min-width agar card lebih lebar -->
+    
+    <!-- Header section -->
+    <div class="bg-gray-700 text-yellow-400 p-4 rounded-t-lg border-b-2 border-gray-700 flex justify-between">
+      <h3 class="font-bold text-xl">{{ car_entry.name }}</h3> <!-- Nama mobil -->
+      <p class="text-sm text-gray-400">{{ car_entry.time }}</p> <!-- Waktu -->
+    </div>
+    
+    <!-- Body section -->
+    <div class="p-4 space-y-4">
+      
+      <!-- Description -->
+      <div>
+        <p class="text-sm text-gray-400">Description</p>
+        <p class="text-white">{{ car_entry.description }}</p> <!-- Teks deskripsi -->
+      </div>
+
+      <!-- Price section -->
+      <div>
+        <p class="text-sm text-gray-400">Price</p>
+        <span class="text-lg font-semibold text-white">Rp {{ car_entry.price|intcomma }}</span> <!-- Harga dengan teks putih -->
+      </div>
+
+      <!-- Car Horsepower -->
+      <div>
+        <p class="text-sm text-gray-400">Horsepower</p>
+        <span class="text-lg font-semibold text-white">{{ car_entry.car_horsepower }} HP</span> <!-- Horsepower dengan teks putih -->
+      </div>
+
+    </div>
+    
+    <!-- Footer with action buttons -->
+    <div class="flex justify-end p-4 space-x-2">
+      <a href="{% url 'main:edit_car' car_entry.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md p-2 transition duration-300">
+        Edit
+      </a>
+      <a href="{% url 'main:delete_car' car_entry.pk %}" class="bg-red-500 hover:bg-red-600 text-white rounded-md p-2 transition duration-300">
+        Delete
+      </a>
+    </div>
+  </div>
+
+  <!-- Tambahkan lebih banyak card di sini -->
+
+</div>

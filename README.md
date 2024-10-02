@@ -648,7 +648,7 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
 
     Secara umum, **flexbox** lebih baik untuk tata letak yang sederhana atau elemen yang disusun dalam satu arah (baik horizontal atau vertikal), sedangkan **grid** lebih cocok untuk tata letak yang membutuhkan pengaturan dalam dua arah (baris dan kolom).
 
-    
+
 ## **Pengimplementasian Checklist**
 
 * ### Menambahkan Tailwind ke dalam aplikasi
@@ -940,7 +940,6 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
     ```
 
     Lalu lakukan kustomisasi html pada halaman-halaman yang ada seperti `login.html`, `register.html`, `main.html`, `create_car_entry.html` dan `edit_car.html` sesuai dengan preferensi design masing-masing.
-
 
 </details>
 

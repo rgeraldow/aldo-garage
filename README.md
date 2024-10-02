@@ -81,7 +81,7 @@ Setelah itu kita dapat menjalankan `main` dengan command `python manage.py runse
 
 * ### Bagan request client ke web aplikasi berbasis Django
 
-![](/BAGAN.jpg)
+![](image/BAGAN.jpg)
 
     Dalam alur kerja Django, urls.py bertugas mengatur routing dengan meneruskan request pengguna ke fungsi yang sesuai di views.py. Di views.py, logika aplikasi diimplementasikan, seperti mengambil atau memodifikasi data dari models.py yang terhubung dengan basis data. Data yang diambil kemudian diteruskan ke berkas HTML (template) untuk menghasilkan tampilan yang akan dilihat pengguna. Setelah semua proses selesai, views.py mengembalikan response yang berisi HTML hasil render kepada pengguna, yang kemudian ditampilkan di browser.
 
@@ -282,16 +282,16 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
 
 ## Postman
 ## **1. XML**
-![XML](xml.png)
+![XML](image/xml.png)
 
 ## **2. JSON**
-![JSON](json.png)
+![JSON](image/json.png)
 
 ## **3. XML by ID**
-![XML by ID](<xml id.png>)
+![XML by ID](<image/xml id.png>)
 
 ## **4. JSON by ID**
- ![JSON by ID](<json id.png>)
+ ![JSON by ID](<image/json id.png>)
 
 </details>
 

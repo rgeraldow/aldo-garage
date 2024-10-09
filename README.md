@@ -891,7 +891,7 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
     ...
     ```
 
-    * ### Styling website
+* ### Styling website
 
     Buat file `global.css` pada `/static/css` dan isi dengan
 
@@ -943,5 +943,321 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
 
 </details>
 
+<details>
+<summary> <b> Tugas 6 </b> </summary>
+
+## **Jawaban Tugas 6**
+
+* ### Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+    JavaScript adalah bahasa pemrograman yang sangat penting dalam pengembangan aplikasi web karena memungkinkan halaman web menjadi lebih interaktif dan dinamis. Dengan JavaScript, pengembang dapat membuat elemen yang responsif, seperti tombol yang berubah ketika diklik, formulir yang memvalidasi input secara langsung, atau gambar yang bergerak. Bahasa ini berjalan langsung di browser, jadi tidak memerlukan pengolahan dari server, yang membuatnya cepat dan efisien. Selain itu, JavaScript dapat berintegrasi dengan HTML dan CSS, sehingga pengembang bisa dengan mudah mengontrol tampilan halaman web. Manfaat lainnya, JavaScript memiliki banyak framework dan template (seperti React, Angular, dan jQuery) yang memudahkan pengembang untuk membuat aplikasi web yang lebih kompleks dengan lebih cepat. Ini menjadikan JavaScript salah satu bahasa yang sangat fleksibel dan penting untuk pengembangan web modern.
+
+* ### Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+    
+    Ketika kita menggunakan `fetch()` dalam JavaScript untuk mengambil data dari server, fungsi ini mereturn sebuah "promise", yang artinya operasi tersebut berjalan secara asinkron, atau di background, sehingga kode lain tetap bisa berjalan tanpa menunggu hasil dari `fetch()`. Nah, di sinilah fungsi `await` menjadi penting. Ketika kita menambahkan `await` di depan `fetch()`, kita menyuruh JavaScript untuk menunggu hingga operasi pengambilan data selesai sebelum melanjutkan ke baris kode berikutnya. Ini membuat kode lebih mudah dibaca dan mengikuti alur yang berurutan, mirip seperti kode sinkron.
+
+    Jika kita tidak menggunakan `await`, kode akan langsung melanjutkan ke baris berikutnya sebelum `fetch()` selesai mengambil data. Akibatnya, kita mungkin mencoba mengakses data yang belum tersedia, yang bisa menimbulkan error atau hasil yang tidak diinginkan. Dengan `await`, kita bisa memastikan data sudah siap digunakan sebelum melanjutkan.
+
+* ### Mengapa kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk AJAX `POST`?
+
+    Kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk **AJAX POST** karena dalam Django, ada mekanisme keamanan bernama **Cross-Site Request Forgery (CSRF) protection**. Mekanisme ini bertujuan untuk melindungi aplikasi dari serangan di mana pengguna tanpa sadar mengirimkan permintaan berbahaya ke situs web dari sumber eksternal. Secara default, Django memeriksa setiap request POST untuk memastikan bahwa request tersebut berasal dari sumber yang sah dengan menggunakan token CSRF.
+
+    Namun, ketika kita menggunakan AJAX untuk mengirim request POST, terutama dari JavaScript, ada kemungkinan token CSRF ini tidak dikirimkan atau tidak diatur dengan benar, yang akan membuat request tersebut ditolak oleh Django dengan error "403 Forbidden". Dengan menggunakan decorator `csrf_exempt`, kita memberitahu Django agar tidak memeriksa token CSRF untuk view tersebut, sehingga request AJAX POST bisa tetap diproses tanpa dicegah oleh mekanisme keamanan ini. Meskipun demikian, perlu berhati-hati saat menggunakannya karena bisa mengurangi lapisan keamanan jika view tersebut berhubungan dengan data sensitif.
+
+* ###  Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+    Pembersihan data input pengguna sebaiknya tidak hanya dilakukan di frontend, tapi juga di backend karena alasan keamanan. Jika kita hanya mengandalkan frontend (misalnya dengan JavaScript) untuk membersihkan atau memvalidasi input, pengguna yang tidak bertanggung jawab dapat dengan mudah melewati validasi ini, misalnya dengan mematikan JavaScript atau memanipulasi request sebelum dikirim ke server. Hal ini bisa membuka celah bagi serangan seperti **injection** atau **XSS (Cross-Site Scripting)**. Oleh karena itu, walaupun validasi di frontend dapat membantu memberikan pengalaman pengguna yang lebih baik (misalnya dengan memberikan umpan balik langsung), pembersihan data di backend tetap sangat penting untuk memastikan bahwa data yang masuk aman dan sesuai standar, karena backend adalah lapisan terakhir sebelum data disimpan atau diproses lebih lanjut di server.
+
+
+## **Pengimplementasian Checklist**
+
+* ### Menambahkan *Error Message* pada Login
+
+    Tambahkan potongan kode berikut pada `main/views.py` untuk menampilkan error message pada login page
+
+    ```
+    ...
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+    else:
+        messages.error(request, "Invalid username or password. Please try again.")
+    ...
+    ```
+
+* ### Buat fungsi untuk menambahkan Car dengan AJAX
+
+    Pertama kita akan membuat function baru dengan menambahkan function `add_car_entry_ajax `pada file `views.py` yang ada pada subdirektori `main`
+
+    ```
+    ...
+    @csrf_exempt
+    @require_POST
+    def add_car_entry_ajax(request):
+        car = request.POST.get("car")
+        description = request.POST.get("description")
+        price = request.POST.get("price")
+        car_horsepower = request.POST.get("hosepower")
+        user = request.user
+
+        new_car = CarEntry(
+            car=car, description=description,
+            price=price, car_horsepower=car_horsepower,
+            user=user
+        )
+        new_car.save()
+
+        return HttpResponse(b"CREATED", status=201)
+    ```
+
+    Kemudian, tambahkan import seperti berikut pada file `views.py`
+
+    ```
+    from django.views.decorators.csrf import csrf_exempt
+    from django.views.decorators.http import require_POST
+    ```
+
+* ### Menambahkan Routing Untuk Fungsi add_car_entry_ajax
+
+    Tambahkan beberapa kode dan import berikut ke dalam `main/urls.py` untuk melakukan routing fungsi `add_car_entry_ajax`
+
+    ```
+    from main.views import ..., add_car_entry_ajax
+    ...
+    urlpatterns = [
+        ...
+        path('create-car-entry-ajax', add_car_entry_ajax, name='add_car_entry_ajax'),
+    ]
+    ```
+
+* ### Menampilkan Data Mood Entry dengan fetch() API
+
+   Hapus baris berikut pada `main/views.py`
+
+    ```
+    car_entries = CarEntry.objects.filter(user=request.user)
+    ```
+
+    dan
+
+    ```
+    'car_entries': car_entries,
+    ```
+    Pada file `views.py` ubahlah baris pertama views pada `show_json` dan `show_xml` menjadi
+
+    ```
+    data = CarEntry.objects.filter(user=request.user)
+    ```
+
+    Pada file `main.html` hapus bagian block conditional `car_entries` untuk menampilkan card_mood ketika kosong atau tidak seperti berikut
+
+    ```
+     {% if not car_entries %}
+        <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+            <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+            <p class="text-center text-gray-600 mt-4">There os no product yet.</p>
+        </div>
+    {% else %}
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+            {% for car_entry in car_entries %}
+                {% include 'card_car.html' with car_entry=car_entry %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    ```
+
+    Lalu tambahkan potongan kode ini di tempat yang sama seperti potongan kode yang dihapus sebelumnya
+
+    ```
+    ...
+    <div id="mood_entry_cards"></div>
+    ...
+    ```
+
+    Buat blok `<script>` pada bagian bawah file `main.html` sebelum `{% endblock content %}` dan buatlah fungsi baru pada blok `<script>` dengan nama `getCarEntries` dan `refreshCarEntries`
+
+    ```
+    async function getCarEntries(){
+        return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+    }
+
+    async function refreshCarEntries() {
+        document.getElementById("car_entry_cards").innerHTML = "";
+        document.getElementById("car_entry_cards").className = "";
+        const carEntries = await getCarEntries();
+        let htmlString = "";
+        let classNameString = "";
+
+        if (carEntries.length === 0) {
+            classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+            htmlString = `
+                <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                    <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+                    <p class="text-center text-gray-600 mt-4">There is no product yet.</p>
+                </div>
+            `;
+        }
+        else {
+        classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full"
+        carEntries.forEach((item) => {
+        const mood = DOMPurify.sanitize(item.fields.mood);
+        const feelings = DOMPurify.sanitize(item.fields.feelings);
+            htmlString += `
+            <div class="relative break-inside-avoid">
+                <div class="absolute top-2 z-10 left-1/2 -translate-x-1/2 flex items-center -space-x-2">
+                    <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+                    <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+                </div>
+                <div class="relative top-5 bg-indigo-100 shadow-md rounded-lg mb-6 break-inside-avoid flex flex-col border-2 border-indigo-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <div class="bg-indigo-200 text-gray-800 p-4 rounded-t-lg border-b-2 border-indigo-300">
+                        <h3 class="font-bold text-xl mb-2">${item.fields.mood}</h3>
+                        <p class="text-gray-600">${item.fields.time}</p>
+                    </div>
+                    <div class="p-4">
+                        <p class="font-semibold text-lg mb-2">My Feeling</p>
+                        <p class="text-gray-700 mb-2">
+                            <span class="bg-[linear-gradient(to_bottom,transparent_0%,transparent_calc(100%_-_1px),#CDC1FF_calc(100%_-_1px))] bg-[length:100%_1.5rem] pb-1">${item.fields.feelings}</span>
+                        </p>
+                        <div class="mt-4">
+                            <p class="text-gray-700 font-semibold mb-2">Intensity</p>
+                            <div class="relative pt-1">
+                                <div class="flex mb-2 items-center justify-between">
+                                    <div>
+                                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">
+                                            ${item.fields.mood_intensity > 10 ? '10+' : item.fields.mood_intensity}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-indigo-200">
+                                    <div style="width: ${item.fields.mood_intensity > 10 ? 100 : item.fields.mood_intensity * 10}%;" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-0 -right-4 flex space-x-1">
+                    <a href="/edit-mood/${item.pk}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
+                    </a>
+                    <a href="/delete/${item.pk}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            `;
+        });
+        }
+        document.getElementById("car_entry_cards").className = classNameString;
+        document.getElementById("car_entry_cards").innerHTML = htmlString;
+    }
+    ```
+
+* ### Menambahkan data *Car* dengan AJAX
+
+    Buat fungsi baru pada blok `<script>` dengan nama `addCarEntry`
+
+    ```
+    function addCarEntry() {
+        fetch("{% url 'main:add_car_entry_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#mcarEntryForm')),
+        })
+        .then(response => refreshCarEntries())
+
+        document.getElementById("carEntryForm").reset(); 
+        document.querySelector("[data-modal-toggle='crudModal']").click();
+
+        return false;
+    }
+    ```
+
+    Lalu tambahkan sebuah event listener pada form yang ada di modal untuk menjalankan fungsi `addCarEntry()` dengan menambahkan kode berikut.
+
+    ```
+    <script>
+    ...
+    document.getElementById("carEntryForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        addCarEntry();
+    })
+    </script>
+    ```
+
+* ### Menambahkan `strip_tags` untuk membersihkan data baru
+
+    Tambahkan impor berikut pada file `views.py` dan `forms.py`
+
+    ```
+    from django.utils.html import strip_tags
+    ```
+
+    Pada fungsi `add_car_entry_ajax` di `views.py`, gunakan fungsi `strip_tags` pada data `car` dan `description` sebelum data tersebut masuk ke dalam `CarEntry`
+
+    ```
+    @csrf_exempt
+    @require_POST
+    def add_car_entry_ajax(request):
+        car = strip_tags(request.POST.get("car")) # strip HTML tags!
+        description = strip_tags(request.POST.get("description"))
+    ...
+    ```
+
+    Lalu pada class `CarEntryForm` di `forms.py` tambahkan kedua method berikut
+
+    ```
+    ...
+    class CarEntryForm(ModelForm):
+        class Meta:
+            ...
+        
+        def clean_car(self):
+            car = self.cleaned_data["car"]
+            return strip_tags(car)
+
+        def clean_description(self):
+            description = self.cleaned_data["description"]
+            return strip_tags(description)
+    ...
+    ```
+
+* ### Mebersihkan data dengan DOMPurify
+
+    Pada `main.html` tambahkan beberapa potongan kode berikut
+
+    ```
+    {% block meta %}
+    ...
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+    ...
+    {% endblock meta %}
+    ```
+    
+    dan 
+
+    ```
+    <script>
+        ...
+        async function refreshMoodEntries() {
+            ...
+            moodEntries.forEach((item) => {
+                const mood = DOMPurify.sanitize(item.fields.mood);
+                const feelings = DOMPurify.sanitize(item.fields.feelings);
+                ...
+            });
+            ...
+        }
+        ...
+    </script>
+    ```
+
+    Lalu web kita sudah dapat terlindungi dari XSS dan sudah otomatis merefresh halaman tanpa pindah page.
+</details>
 
 

@@ -1205,7 +1205,7 @@ Dengan ini, input `form` dapat dijalankan dengan command `python manage.py runse
     @require_POST
     def add_car_entry_ajax(request):
         car = strip_tags(request.POST.get("car")) # strip HTML tags!
-        description = strip_tags(request.POST.get("description"))
+        description = strip_tags(request.POST.get("description"))  # strip HTML tags!
     ...
     ```
 

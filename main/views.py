@@ -118,14 +118,14 @@ def delete_car(request, id):
 @csrf_exempt
 @require_POST
 def add_car_entry_ajax(request):
-    car = strip_tags(request.POST.get("car")) # strip HTML tags!
+    name = strip_tags(request.POST.get("name")) # strip HTML tags!
     description = strip_tags(request.POST.get("description"))
     price = request.POST.get("price")
     car_horsepower = request.POST.get("car_horsepower")
     user = request.user
 
     new_car = CarEntry(
-        car=car, description=description,
+        name=name, description=description,
         price=price, car_horsepower=car_horsepower,
         user=user
     )
@@ -138,7 +138,7 @@ def create_car_flutter(request):
     if request.method == 'POST':
 
         data = json.loads(request.body)
-        new_mood = CarEntry.objects.create(
+        new_car = CarEntry.objects.create(
             user=request.user,
             name=data["name"],
             price=int(data["price"]),
@@ -146,8 +146,9 @@ def create_car_flutter(request):
             car_horsepower=int(data["car_horsepower"]),
         )
 
-        new_mood.save()
+        new_car.save()
 
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+    

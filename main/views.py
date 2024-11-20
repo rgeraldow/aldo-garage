@@ -1,7 +1,8 @@
+import json
 from django.shortcuts import render, redirect, reverse
 from main.forms import CarEntryForm
 from main.models import CarEntry
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
@@ -131,3 +132,22 @@ def add_car_entry_ajax(request):
     new_car.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+@csrf_exempt
+def create_car_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_mood = CarEntry.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            car_horsepower=int(data["car_horsepower"]),
+        )
+
+        new_mood.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
